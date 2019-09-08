@@ -24,7 +24,7 @@ pipeline {
   environment {
     IMAGE_NAME = 'app-demo'
     GIT_COMMIT = GIT_COMMIT.take(8)
-    REPOSITORY = "agvaress/test"
+    REPOSITORY = "ogrigor/demo-app"
   }
 
   stages {
