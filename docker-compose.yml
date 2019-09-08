@@ -1,0 +1,23 @@
+---
+version: '2.1'
+
+services:
+  app:
+    image: app:latest
+    build: .
+    container_name: app-dev
+    volumes:
+      # Source code & unit tests
+      - './app:/usr/src/app'
+      # e2e tests
+      - './e2e_tests:/usr/src/e2e_tests'
+    ports:
+      - "3000:3000"
+    networks:
+      - app
+
+networks:
+  app:
+    name: app
+
+
