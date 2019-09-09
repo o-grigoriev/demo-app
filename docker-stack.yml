@@ -20,10 +20,7 @@ services:
       placement:
         constraints: [node.role == worker]
     ports:
-      - target: 1080
-        published: 3000
-        protocol: tcp
-        mode: host
+      - "3000:1080"
     networks:
       - demo-app
 
