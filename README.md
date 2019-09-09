@@ -1,5 +1,7 @@
 # express-app-testing-demo
 
+##  This is demo fork of the app originaly posted on https://github.com/gregjopa/express-app-testing-demo !!!
+
 This project is a simple express app for demonstrating testing and code coverage.
 [Jest](https://facebook.github.io/jest/) and
 [Supertest](https://github.com/visionmedia/supertest) are used for testing.
