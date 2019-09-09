@@ -1,0 +1,48 @@
+---
+version: '3.7'
+
+services:
+  demo-app:
+    image: ogrigor/demo-app
+    environment:
+      SERVICE_PORTS: 3000
+    healthcheck:
+      test: ["CMD", "wget", "-O", "-", "http://localhost:3000"]
+      interval: 5s
+      timeout: 5s
+    deploy:
+      mode: replicated
+      replicas: 3
+      update_config:
+        parallelism: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == worker]
+    ports:
+      - target: 1080
+        published: 3000
+        protocol: tcp
+        mode: host
+    networks:
+      - demo-app
+
+  demo-app-lb:
+    image: dockercloud/haproxy
+    depends_on:
+      - demo-app
+    environment:
+      BALANCE: leastconn
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 8080:80
+    networks:
+      - demo-app
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+networks:
+  demo-app:
+    name: demo-app
